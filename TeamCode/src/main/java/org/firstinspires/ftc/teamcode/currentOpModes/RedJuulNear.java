@@ -37,11 +37,7 @@ public class RedJuulNear extends LinearOpMode {
         }
         robot.drive.stop();
 
-        while (robot.drive.imu.getHeading() > -90 && opModeIsActive()) {
-            idle();
-            robot.drive.rotating(-1);
-        }
-        robot.drive.stop();
+        robot.drive.encoderTurn(-90, 1);
 
         int angle = -90;
         if (column == RelicRecoveryVuMark.UNKNOWN)

@@ -37,7 +37,7 @@ public class SpeedyBot {
         suckyBois.setPower(-1);
 
         drive.resetEncoders();
-        while (drive.drivingForwardConserv(180, 1, 0)) {
+        while (drive.drivingForwardNoGyro(180, 1)) {
             opMode.idle();
         }
         drive.stop();

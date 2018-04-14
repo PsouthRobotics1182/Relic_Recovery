@@ -37,11 +37,7 @@ public class BlueJuulNear extends LinearOpMode {
         }
         robot.drive.stop();
 
-        while (robot.drive.imu.getHeading() > -90 && opModeIsActive()) {
-            idle();
-            robot.drive.rotating(-1);
-        }
-        robot.drive.stop();
+        robot.drive.encoderTurn(-90, 0.7);
 
         int angle = -90;
         if (column == RelicRecoveryVuMark.UNKNOWN)
@@ -53,11 +49,11 @@ public class BlueJuulNear extends LinearOpMode {
         else if (column == RelicRecoveryVuMark.RIGHT)
             angle = -90;
 
-        robot.drive.rotate(angle, 1);
+        robot.drive.rotate(angle, 0.7);
 
         robot.depositGlyph();
 
-        robot.drive.rotate(-angle, 1);
+        robot.drive.rotate(-angle, 0.7);
 
         
 

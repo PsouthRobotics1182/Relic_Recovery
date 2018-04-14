@@ -124,11 +124,12 @@ public class BlueJuul extends LinearOpMode {
         //robot.drive.strafeRange(mmStrafe, 0.8);
 
         //robot.leftMotor.leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        while (robot.drive.imu.getHeading() < 90 && opModeIsActive()) {
+        /*while (robot.drive.imu.getHeading() < 90 && opModeIsActive()) {
             idle();
             robot.drive.rotating(1);
-        }
+        }*/
 
+        robot.drive.encoderTurn(180,0.7);
         robot.drive.rotate(90, 0.7);
 
 
