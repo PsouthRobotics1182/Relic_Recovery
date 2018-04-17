@@ -117,10 +117,10 @@ public class JuulHittererer {
         opMode.sleep(1000);
 
         switch(getColor()) {
-            case Color.BLUE:
+            case Color.RED:
                 right();
                 break;
-            case Color.RED:
+            case Color.BLUE:
                 left();
                 break;
             default:

@@ -33,7 +33,7 @@ public class FineSlide {
     public static final int WHEEL_RADIUS_MM = 90;
     public static final int WHEEL_CIRCUMFRENCE = (int) (Math.PI  * WHEEL_RADIUS_MM);
     //mm distance between the two sides of the drivetrain
-    public static final double CHASSIS_WHEEL_SPACING_MM = 16 * 2.54;
+    public static final double CHASSIS_WHEEL_SPACING_MM = 340;
 
     /**
      *
@@ -419,10 +419,11 @@ public class FineSlide {
         double arcLength = (radians * CHASSIS_WHEEL_SPACING_MM/2);
         int targetTicks = Math.abs(MM2ticks(arcLength));
         while (opMode.opModeIsActive() &&
-                (Math.abs(getPositionLeft()) < targetTicks || Math.abs(getPositionRight()) < targetTicks )) {
+                (Math.abs(leftFront.getCurrentPosition()) < targetTicks && Math.abs(rightFront.getCurrentPosition()) < targetTicks )) {
             rotating(power);
             opMode.idle();
         }
+        stop();
     }
 
     //drives in the driection of the given vector with the orientation locked

@@ -21,7 +21,7 @@ public class RedJuul extends LinearOpMode {
      // Global Variables //
     //////////////////////
 
-    BetterVuforia vuforia;
+    //BetterVuforia vuforia;
     RelicRecoveryVuMark column;
 
       //////////////////////
@@ -32,9 +32,9 @@ public class RedJuul extends LinearOpMode {
      * Update the current column if it is unknown.
      */
 
-    public RelicRecoveryVuMark updateColumn() {
+    /*public RelicRecoveryVuMark updateColumn() {
         return (column == RelicRecoveryVuMark.UNKNOWN) ? vuforia.getColumn() : column;
-    }
+    }*/
 
       /////////////////
      // Main OpMode //
@@ -47,9 +47,9 @@ public class RedJuul extends LinearOpMode {
         ////////////////////
 
         SpeedyBot robot = new SpeedyBot(this, DcMotor.RunMode.RUN_USING_ENCODER);
-        vuforia = new BetterVuforia(this, true);
+        //vuforia = new BetterVuforia(this, true);
         ElapsedTime runTime = new ElapsedTime();
-        vuforia.activate();
+        //vuforia.activate();
 
         telemetry.addData("Ready", null);
         telemetry.update();
@@ -57,7 +57,7 @@ public class RedJuul extends LinearOpMode {
         waitForStart();
         runTime.reset();
 
-        column = vuforia.getColumn();
+        //column = vuforia.getColumn();
 
 
         robot.juulHittererer.hitRed();
@@ -68,7 +68,7 @@ public class RedJuul extends LinearOpMode {
         robot.drive.strafeLeft(SpeedyBot.DRIVE_OFF_DISTANCE, 1);
         robot.drive.stop();
 
-        column = vuforia.getColumn();
+        column = RelicRecoveryVuMark.RIGHT;//vuforia.getColumn();
 
         robot.drive.imu.setMode(FineIMU.Mode.ON_PAD);
         //robot.sleep(5000);
@@ -76,7 +76,8 @@ public class RedJuul extends LinearOpMode {
         robot.drive.resetEncoders();
         runTime.reset();
         while (robot.drive.drivingForwardConserv(600, 0.6, 0)) {
-            updateColumn();
+            idle();
+            //updateColumn();
         }
 
         robot.drive.stop();
@@ -86,7 +87,7 @@ public class RedJuul extends LinearOpMode {
         robot.drive.driveBackward(100, 1);
 
         robot.sleep(1000);
-        column = vuforia.getColumn();
+        //column = vuforia.getColumn();
 
         robot.drive.setAngleTolerence(3);
 
@@ -98,7 +99,7 @@ public class RedJuul extends LinearOpMode {
 
         robot.drive.rotate(0, 0.7);
 
-        column = (column == RelicRecoveryVuMark.UNKNOWN) ? vuforia.getColumn() : column;
+        //column = (column == RelicRecoveryVuMark.UNKNOWN) ? vuforia.getColumn() : column;
 
         telemetry.addData("Column", column);
         telemetry.update();
@@ -135,11 +136,8 @@ public class RedJuul extends LinearOpMode {
         robot.suckyBois.boot(0);
         robot.depositGlyph();
 
-        while (robot.drive.imu.getHeading() > 0) {
-            idle();
-            robot.drive.rotating(1);
-        }
-        robot.drive.stop();
+
+        robot.drive.encoderTurn(180, 1);
 
 
 

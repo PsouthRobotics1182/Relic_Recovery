@@ -33,15 +33,44 @@ public class SpeedyBot {
         this.opMode = opMode;
     }
 
-    public void depositGlyph() {
+    public void depositGlyphNGyro() {
         suckyBois.setPower(-1);
 
+        sleep(1500);
+        drive.driveBackward(80, 1);
+
+        drive.encoderTurn(180/2, 1);
+
+        drive.resetEncoders();
+        while (drive.drivingBackwardConsv(180, 0.5)) {
+            opMode.idle();
+        }
+        drive.stop();
+
+        drive.resetAngle();
+        drive.resetEncoders();
+        while (drive.drivingForwardNoGyro(100, 0.5)) {
+            opMode.idle();
+        }
+        drive.stop();
+
+        suckyBois.setPower(0);
+    }
+    public void depositGlyph() {
+        drive.resetAngle();
+        //suckyBois.setPower(-1);
+
+        lift.flip(Flipper.VERTICAL);
+
+        drive.resetAngle();
         drive.resetEncoders();
         while (drive.drivingForwardNoGyro(180, 1)) {
             opMode.idle();
         }
         drive.stop();
 
+        suckyBois.setPower(-1);
+        sleep(1000);
         drive.driveBackward(100, 1);
 
         suckyBois.setPower(0);
